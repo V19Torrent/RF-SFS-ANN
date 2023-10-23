@@ -1,4 +1,4 @@
-# STIN-data-set
-This data set contains flow-based network security data sets extracted from satellite networks and terrestrial networks. We named the dataset SAT20 and TER20 respectively.
+# RF-SFS-ANN
+To train the model, run python train_ann_model.py
 
-Note: We have kept the original experimental data in this branch, and the latest modification has been submitted to the branch "master".
+To load the saved model, run python load_ann_model.py
