@@ -19,9 +19,13 @@ sample = np.delete(sample, 10)
 # Model expects 2-dim data. Transform into 2-D array that contains 1 sample.
 sample = np.reshape(sample, (1,-1))
 
+print(f"Original sample: {sample}")
+
 sample_prediction = model_stin.predict(sample)
 
 sample[0][8] = 1
+
+print(f"Modified sample: {sample}")
 
 modified_sample_prediction = model_stin.predict(sample)
 
