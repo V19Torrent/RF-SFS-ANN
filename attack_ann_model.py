@@ -1,4 +1,4 @@
-import pickle
+from tensorflow import keras
 
 import numpy as np
 import pandas as pd
@@ -6,8 +6,7 @@ import pandas as pd
 import sklearn.metrics as metrics
 
 # Load the model
-with open('saved-rf-sfs-ann.pkl', 'rb') as f:
-    model_stin = pickle.load(f)
+model_stin = keras.models.load_model('saved-rf-sfs-ann.keras')
 
 df = pd.read_csv('cleaned_data.csv')
 
