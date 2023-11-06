@@ -11,7 +11,7 @@ model_stin = keras.models.load_model('saved-rf-sfs-ann.keras')
 df = pd.read_csv('cleaned_data.csv')
 
 # Uncomment when debugging
-df = df.sample(n=100)
+# df = df.sample(n=100)
 
 y = df['Label']
 df.drop(columns="Label", inplace=True)
