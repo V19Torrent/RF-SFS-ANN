@@ -15,8 +15,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
-import pickle
-
 # Data preparation
 df_sat = pd.read_csv("SAT20.csv")
 df_ter = pd.read_csv("TER20.csv")
@@ -118,6 +116,11 @@ print(sfs.k_feature_names_)
 X = X[np.array(sfs.k_feature_names_)]
 # Data prep complete, X and y_encoded are the variables to train the models with
 
+# To save the cleaned data
+# X['Label'] = y_encoded
+
+# X.to_csv('cleaned_data.csv', index=False)
+
 def build_ann_model(input_dim, hidden_neurons, output_neurons, activation_hidden='tanh', activation_output='softmax'):
     model = Sequential()
 
@@ -163,5 +166,4 @@ model_stin.fit(X_train_stin, y_train_stin, epochs=n_epochs)
 y_predictions = model_stin.predict(X_test_stin)
 
 # Save the model
-with open('saved-rf-sfs-ann.pkl', 'wb') as f:
-    pickle.dump(model_stin, f)
+model_stin.save('saved-rf-sfs-ann.keras')
