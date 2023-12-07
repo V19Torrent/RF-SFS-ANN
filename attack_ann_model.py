@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 import sklearn.metrics as metrics
+import seaborn as sns
 
 import matplotlib.pyplot as plt
 
@@ -23,12 +24,16 @@ X.head()
 
 predictions = model_stin.predict(X)
 
+cm_good = metrics.confusion_matrix(y, np.argmax(predictions, axis=1))
+
 accuracy_clean_data = metrics.accuracy_score(y, np.argmax(predictions, axis=1)) * 100
 
 X['fw_win_byt'] = 1
 
 predictions = model_stin.predict(X)
 accuracy_affected_data = metrics.accuracy_score(y, np.argmax(predictions, axis=1)) * 100
+
+cm_bad = metrics.confusion_matrix(y, np.argmax(predictions, axis=1))
 
 print(f"Accuracy using unmodified data {accuracy_clean_data:.2f}%")
 print(f"Accuracy using modified data {accuracy_affected_data:.2f}%")
@@ -58,3 +63,21 @@ ax.set_title('Attack Accuracy')
 
 # Show the chart
 plt.savefig('acc.png')
+plt.clf()
+
+sns.heatmap(cm_good,
+            annot=True,
+            fmt='g')
+plt.ylabel('Prediction',fontsize=13)
+plt.xlabel('Actual',fontsize=13)
+plt.title('Confusion Matrix Good Data',fontsize=17)
+plt.savefig("confusion_matrix_good.png")
+plt.clf()
+
+sns.heatmap(cm_bad,
+            annot=True,
+            fmt='g')
+plt.ylabel('Prediction',fontsize=13)
+plt.xlabel('Actual',fontsize=13)
+plt.title('Confusion Matrix Bad Data',fontsize=17)
+plt.savefig("confusion_matrix_bad.png")
